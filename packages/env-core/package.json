@@ -1,0 +1,32 @@
+{
+  "name": "@luolapeikko/env-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown src/index.ts --sourcemap --format cjs,esm --dts --clean",
+    "validate": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "mharj",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "peerDependencies": {
+    "@avanio/logger-like": ">= 0.1.0",
+    "@luolapeikko/result-option": ">= 2.0.1",
+    "@luolapeikko/ts-common": ">= 1.0.0",
+    "@standard-schema/spec": ">= 1.0.0"
+  }
+}

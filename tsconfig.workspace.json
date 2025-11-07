@@ -1,0 +1,8 @@
+{
+	"extends": "./tsconfig.base.json",
+	"compilerOptions": {
+		"paths": {
+			"@luolapeikko/env-core": ["packages/env-core/src/index.ts"]
+		}
+	}
+}
