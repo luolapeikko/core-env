@@ -7,8 +7,7 @@
         "useSortedKeys": "on"
       }
     },
-    "enabled": true,
-    "includes": ["**/src/**/*.ts"]
+    "enabled": true
   },
   "files": {
     "ignoreUnknown": false,
@@ -62,6 +61,7 @@
         "noAdjacentSpacesInRegex": "error",
         "noExcessiveCognitiveComplexity": "error",
         "noExtraBooleanCast": "error",
+        "noStaticOnlyClass": "off",
         "noUselessCatch": "error",
         "noUselessEscapeInRegex": "error",
         "noUselessTypeConstraint": "error",
@@ -106,6 +106,12 @@
         "useAsConstAssertion": "error",
         "useBlockStatements": "error",
         "useConsistentArrayType": "error",
+        "useConsistentMemberAccessibility": {
+          "level": "error",
+          "options": {
+            "accessibility": "explicit"
+          }
+        },
         "useForOf": "error",
         "useNodejsImportProtocol": "off",
         "useShorthandFunctionType": "error"
@@ -154,6 +160,9 @@
       "includes": ["**/*.test.ts"],
       "linter": {
         "rules": {
+          "style": {
+            "noCommonJs": "off"
+          },
           "suspicious": {
             "noExplicitAny": "off"
           }

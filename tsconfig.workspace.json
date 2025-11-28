@@ -1,8 +1,21 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"paths": {
-			"@luolapeikko/env-core": ["packages/env-core/src/index.ts"]
-		}
-	}
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@luolapeikko/core-env": ["packages/core-env/src/index.ts"],
+      "@luolapeikko/core-env-nodejs": ["packages/core-env-nodejs/src/index.ts"],
+      "@luolapeikko/core-env-dotenv": ["packages/core-env-dotenv/src/index.ts"],
+      "@luolapeikko/core-env-container": [
+        "packages/core-env-container/src/index.ts"
+      ],
+      "@luolapeikko/core-env-vite": ["packages/core-env-vite/src/index.ts"],
+      "@luolapeikko/core-env-fetch": ["packages/core-env-fetch/src/index.ts"],
+      "@luolapeikko/core-env-azurekv": [
+        "packages/core-env-azurekv/src/index.ts"
+      ],
+      "@luolapeikko/core-env-tachyon": [
+        "packages/core-env-tachyon/src/index.ts"
+      ]
+    }
+  }
 }

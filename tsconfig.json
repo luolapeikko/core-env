@@ -1,6 +1,13 @@
 {
-	"files": [],
-	"references": [
-		{"path": "./packages/env-core"},
-	]
+  "files": [],
+  "references": [
+    { "path": "./packages/core-env" },
+    { "path": "./packages/core-env-nodejs" },
+    { "path": "./packages/core-env-dotenv" },
+    { "path": "./packages/core-env-container" },
+    { "path": "./packages/core-env-vite" },
+    { "path": "./packages/core-env-fetch" },
+    { "path": "./packages/core-env-azurekv" },
+    { "path": "./packages/core-env-tachyon" }
+  ]
 }

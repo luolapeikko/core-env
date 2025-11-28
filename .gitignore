@@ -31,3 +31,6 @@ tsconfig.tsbuildinfo
 
 # docs
 doc
+
+# .env
+.env

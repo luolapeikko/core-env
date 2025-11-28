@@ -1,0 +1,39 @@
+{
+  "name": "@luolapeikko/core-env",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown src/index.ts --sourcemap --format cjs,esm --dts --clean",
+    "validate": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "mharj",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "peerDependencies": {
+    "@avanio/logger-like": ">= 0.1.0",
+    "@luolapeikko/core-ts-error": ">= 0.0.4",
+    "@luolapeikko/core-ts-loadable": ">= 0.0.4",
+    "@luolapeikko/core-ts-type": ">= 0.0.4",
+    "@luolapeikko/result-option": ">= 2.1.1",
+    "@standard-schema/spec": ">= 1.0.0"
+  }
+}

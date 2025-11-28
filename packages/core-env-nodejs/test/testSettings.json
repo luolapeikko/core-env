@@ -1,0 +1,8 @@
+{
+    "SETTINGS_VARIABLE1": "string value",
+    "SETTINGS_VARIABLE2": true,
+    "SETTINGS_VARIABLE3": "true",
+    "SETTINGS_VARIABLE4": 1,
+    "SETTINGS_VARIABLE5": "1",
+    "SETTINGS_VARIABLE6": null
+}
