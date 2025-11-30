@@ -131,7 +131,7 @@ export class EnvKit<Data extends Record<string, unknown>> {
 			if (this.#options.loaderError === 'throws' && result.isErr) {
 				return result;
 			}
-			const data = result.inspectErr((err) => this.logger.logKey('loaderError', `Loader error: ${String(lookupKey)} ${err.message}`)).ok();
+			const data = result.inspectErr((err) => this.logger.logKey('loaderError', err.message)).ok();
 			if (result.isOk && data?.value) {
 				return (await currentParser(data.value)).andThen((value: Data[K]) => {
 					return Ok({loaderType: data.loaderType, path: data.path, value});

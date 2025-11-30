@@ -2,7 +2,7 @@ import {ExpireCache} from '@avanio/expire-cache';
 import type {ILoggerLike} from '@avanio/logger-like';
 import type {TokenCredential} from '@azure/identity';
 import {SecretClient} from '@azure/keyvault-secrets';
-import {AbstractBaseLoader, type IAbstractBaseLoaderProps, type LoaderValueResult} from '@luolapeikko/core-env';
+import {AbstractBaseLoader, type IAbstractBaseLoaderProps, type LoaderValueResult, VariableLookupError} from '@luolapeikko/core-env';
 import {ErrorCast} from '@luolapeikko/core-ts-error';
 import type {Loadable} from '@luolapeikko/core-ts-type';
 import {Err, type IResult, Ok, Result} from '@luolapeikko/result-option';
@@ -117,8 +117,7 @@ export class AzureSecretsConfigLoader<EnvMap extends Record<string, unknown>> ex
 					.inspectOk(() => {
 						options.logger?.debug(this.buildLogStr(`loaded secret ${key} from ${options.url}`));
 					})
-					.inspectErr((err) => {
-						options.logger?.error(this.buildLogStr(`error loading secret ${key} from ${options.url}: ${err.message}`));
+					.inspectErr(() => {
 						// if the promise fails, remove it from cache to allow retry next time
 						setTimeout(() => {
 							this.valuePromises.delete(key);
@@ -139,7 +138,8 @@ export class AzureSecretsConfigLoader<EnvMap extends Record<string, unknown>> ex
 			} = await this.#secretClient.getSecret(lookupKey);
 			return Ok({path: `${vaultUrl}/${lookupKey}`, value});
 		} catch (err) {
-			return Err(ErrorCast.from(err));
+			const cause = ErrorCast.from(err);
+			return Err(new VariableLookupError(lookupKey, this.buildLogStr(`error loading secret "${lookupKey}" from ${options.url}: ${cause.message}`), {cause}));
 		}
 	}
 }
