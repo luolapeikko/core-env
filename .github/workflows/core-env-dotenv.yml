@@ -1,0 +1,15 @@
+name: core-env-dotenv CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/core-env-dotenv/**"
+      - ".github/workflows/core-env-dotenv.yml"
+      - ".github/workflows/module.yml"
+
+jobs:
+  module-flow:
+    uses: ./.github/workflows/module.yml
+    secrets: inherit
+    with:
+      package-path: packages/core-env-dotenv

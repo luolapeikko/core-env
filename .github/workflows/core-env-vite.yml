@@ -1,0 +1,15 @@
+name: core-env-vite CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/core-env-vite/**"
+      - ".github/workflows/core-env-vite.yml"
+      - ".github/workflows/module.yml"
+
+jobs:
+  module-flow:
+    uses: ./.github/workflows/module.yml
+    secrets: inherit
+    with:
+      package-path: packages/core-env-vite

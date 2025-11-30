@@ -1,0 +1,15 @@
+name: core-env-azurekv CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/core-env-azurekv/**"
+      - ".github/workflows/core-env-azurekv.yml"
+      - ".github/workflows/module.yml"
+
+jobs:
+  module-flow:
+    uses: ./.github/workflows/module.yml
+    secrets: inherit
+    with:
+      package-path: packages/core-env-azurekv

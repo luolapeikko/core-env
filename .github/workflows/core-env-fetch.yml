@@ -1,0 +1,15 @@
+name: core-env-fetch CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/core-env-fetch/**"
+      - ".github/workflows/core-env-fetch.yml"
+      - ".github/workflows/module.yml"
+
+jobs:
+  module-flow:
+    uses: ./.github/workflows/module.yml
+    secrets: inherit
+    with:
+      package-path: packages/core-env-fetch
