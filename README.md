@@ -1,4 +1,8 @@
-# env-core
+# @luolapeikko/env-core
+
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+[![Maintainability](https://qlty.sh/gh/luolapeikko/projects/core-env/maintainability.svg)](https://qlty.sh/gh/luolapeikko/projects/core-env)
+[![Code Coverage](https://qlty.sh/gh/luolapeikko/projects/core-env/coverage.svg)](https://qlty.sh/gh/luolapeikko/projects/core-env)
 
 EnvKit utility to get env variables for multiple sources.
 This is a rewrite for older [@avanio/variable-util](https://github.com/mharj/variable-util) packages.

@@ -40,7 +40,6 @@
     "lint": "biome check",
     "lint:fix": "biome check --write",
     "test": "vitest run --typecheck --coverage",
-    "coverage": "vitest run --reporter=dot --coverage --coverage.reporter=json && node -e \"console.log(JSON.stringify(require('./coverage/coverage-final.json'), null, 2))\"",
     "validate": "pnpm -r run validate",
     "docs": "typedoc --options typedoc.json --tsconfig tsconfig.workspace.json"
   },
