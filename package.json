@@ -55,7 +55,7 @@
     "type"
   ],
   "author": "mharj",
-  "license": "MIT",
+  "license": "LGPL-2.1-only",
   "bugs": {
     "url": "https://github.com/luolapeikko/core-ts/issues"
   },

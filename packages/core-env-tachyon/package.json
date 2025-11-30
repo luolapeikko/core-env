@@ -1,7 +1,7 @@
 {
   "name": "@luolapeikko/core-env-tachyon",
   "version": "0.0.1",
-  "description": "",
+  "description": "Tachyon loader for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
@@ -21,12 +21,28 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown src/index.ts --sourcemap --format cjs,esm --dts --clean",
+    "build": "tsdown src/index.ts --sourcemap --format cjs,esm --dts --clean -c tsconfig.build.json",
     "validate": "tsc --noEmit"
   },
-  "keywords": [],
+  "keywords": [
+    "env",
+    "environment",
+    "variables",
+    "config",
+    "configuration",
+    "loader",
+    "parser",
+    "typescript",
+    "schema",
+    "validation",
+    "envkit"
+  ],
   "author": "mharj",
-  "license": "ISC",
+  "license": "LGPL-2.1-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luolapeikko/core-ts.git"
+  },
   "packageManager": "pnpm@10.17.1",
   "devDependencies": {
     "@luolapeikko/core-env": "workspace:*"

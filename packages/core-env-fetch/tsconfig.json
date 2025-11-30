@@ -1,24 +1,15 @@
 {
-	"extends": "../../tsconfig.base.json",
-	"compilerOptions": {
-		"lib": [
-			"esnext",
-			"DOM"
-		],
-		"composite": true,
-		"rootDir": "src",
-		"outDir": "dist"
-	},
-	"include": [
-		"src"
-	],
-	"references": [
-		{
-			"path": "../core-env"
-		}
-	],
-	"exclude": [
-		"*.test.ts",
-		"*.test-d.ts"
-	]
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["esnext", "DOM"],
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../core-env"
+    }
+  ]
 }
