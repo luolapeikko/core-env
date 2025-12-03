@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-dotenv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dotenv loader for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -49,9 +49,8 @@
     "@luolapeikko/core-env-nodejs": "workspace:*"
   },
   "peerDependencies": {
-    "@luolapeikko/core-env": ">= 0.0.1",
-    "@luolapeikko/core-env-nodejs": ">= 0.0.1",
-    "@luolapeikko/core-ts-error": ">= 0.0.4",
+    "@luolapeikko/core-env": ">=0.0.2",
+    "@luolapeikko/core-env-nodejs": ">=0.0.2",
     "@luolapeikko/core-ts-type": ">= 0.0.4",
     "@luolapeikko/result-option": ">= 2.1.1",
     "dotenv": ">= 17"

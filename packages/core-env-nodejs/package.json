@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-nodejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js loaders for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -49,7 +49,7 @@
   },
   "peerDependencies": {
     "@avanio/logger-like": ">= 0.1.0",
-    "@luolapeikko/core-env": ">= 0.0.1",
+    "@luolapeikko/core-env": ">=0.0.2",
     "@luolapeikko/core-ts-error": ">= 0.0.4",
     "@luolapeikko/core-ts-type": ">= 0.0.4",
     "@luolapeikko/result-option": ">= 2.1.1"

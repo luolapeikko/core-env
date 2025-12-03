@@ -161,7 +161,8 @@
       "linter": {
         "rules": {
           "style": {
-            "noCommonJs": "off"
+            "noCommonJs": "off",
+            "useConsistentMemberAccessibility": "off"
           },
           "suspicious": {
             "noExplicitAny": "off"

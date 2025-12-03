@@ -68,7 +68,7 @@ export class TachyonConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKe
 	public clear(): Promise<IResult<void, Error>> {
 		return Result.asyncTupleFlow(
 			this.#initHydrate(),
-			() => this.reload(),
+			() => super.clear(),
 			() => this.#writeStore(),
 		);
 	}
@@ -127,7 +127,6 @@ export class TachyonConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKe
 					logger?.info(`TachyonConfigLoader: Stored ${size} entries to store`);
 					return Ok();
 				} catch (error) {
-					console.log(error);
 					return Err(ErrorCast.from(error));
 				}
 			},

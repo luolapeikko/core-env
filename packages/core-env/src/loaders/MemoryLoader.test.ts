@@ -255,6 +255,16 @@ describe('Test MemoryLoader', function () {
 			expect(updateSpy).not.toHaveBeenCalled();
 		});
 	});
+	describe('clear', function () {
+		it('should clear all keys', async function () {
+			const loader = new MemoryLoader({initialData: {key1: 'value1', key2: 'value2'}});
+			await expect(loader.size()).resolves.toStrictEqual(Ok(2));
+			await loader.clear();
+			await expect(loader.size()).resolves.toStrictEqual(Ok(0));
+			await expect(loader.get('key1')).resolves.toStrictEqual(Ok(undefined));
+			await expect(loader.get('key2')).resolves.toStrictEqual(Ok(undefined));
+		});
+	});
 
 	describe('complex scenarios', function () {
 		it('should handle multiple keys with initial data', async function () {
@@ -294,6 +304,12 @@ describe('Test MemoryLoader', function () {
 			});
 			expect(await loader.get('key1')).toStrictEqual(Ok('value1'));
 			expect(await loader.get('key2')).toStrictEqual(Ok(undefined));
+		});
+		it('should test disabled loader', async function () {
+			const loader = new MemoryLoader({options: {disabled: true}});
+			await loader.init();
+			expect(await loader.isLoaderDisabled()).toStrictEqual(Ok(true));
+			expect(await loader.get('key1')).toStrictEqual(Ok(undefined));
 		});
 	});
 });

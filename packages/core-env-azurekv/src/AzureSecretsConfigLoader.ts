@@ -51,6 +51,7 @@ export class AzureSecretsConfigLoader<EnvMap extends Record<string, unknown>> ex
 
 	protected defaultOptions: AzureSecretsConfigLoaderOptions = {
 		credentials: {
+			/* c8 ignore next 3 */
 			getToken: () => {
 				throw new Error('credentials not set');
 			},

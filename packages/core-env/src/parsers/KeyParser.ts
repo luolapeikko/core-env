@@ -3,7 +3,7 @@ import type {IResult} from '@luolapeikko/result-option';
 import type {StandardSchemaV1} from '@standard-schema/spec';
 import type {IConfigParser} from '../interfaces';
 import {buildLogValue} from '../lib/formatUtils';
-import {resultAll} from '../lib/resultUtil';
+import {resultAll} from '../lib/resultUtils';
 import {isStandardSchema, stdValidateResult} from '../lib/standardSchema';
 import {ValidateCore} from '../lib/ValidateCore';
 import type {KeyFormatType, ObjectEntries, ValueLogFormat} from '../types';

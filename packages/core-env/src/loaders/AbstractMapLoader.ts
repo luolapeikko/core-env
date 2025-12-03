@@ -110,6 +110,17 @@ export abstract class AbstractMapLoader<
 		);
 	}
 
+	/**
+	 * Clear all cached data.
+	 * @returns Promise that resolves to a result indicating success or failure
+	 */
+	public clear(): Promise<IResult<void, Error>> {
+		return Result.asyncTupleFlow(this.init(), () => {
+			this.#data.clear();
+			return Ok();
+		});
+	}
+
 	public isLoaded(): boolean {
 		return this.#isLoaded;
 	}

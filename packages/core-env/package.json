@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Core package for EnvKit, a utility to manage environment variable loading, parsing, and validation from multiple sources with type safety.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

@@ -42,6 +42,10 @@ const testEnv = new EnvKit<EnvMap>(
 	{logger: testLogger},
 );
 
+function sleep(ms: number): Promise<void> {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 describe('config variable', () => {
 	beforeEach(async () => {
 		(await envLoader.reload()).unwrap();
@@ -74,9 +78,14 @@ describe('config variable', () => {
 		});
 		it('should return SETTINGS_VARIABLE6 (null value)', async function () {
 			await fs.promises.utimes(filePath, new Date(), new Date());
-			await new Promise((resolve) => setTimeout(resolve, 500)); // wait for file watcher to pick up the change
+			await sleep(10);
+			await fs.promises.utimes(filePath, new Date(), new Date());
+			await sleep(10);
+			await fs.promises.utimes(filePath, new Date(), new Date());
+			await sleep(500);
 			expect(logSpy.mock.calls[0][0]).to.be.eq(`ConfigLoader[json-file]: loading file ${filePath}`);
 			expect(logSpy.mock.calls[1][0]).to.be.eq(`ConfigLoader[json-file]: reloaded file ${filePath} due to change`);
+			expect(logSpy.mock.calls.length).to.be.eq(2);
 		});
 	});
 	describe('Test module loading', () => {

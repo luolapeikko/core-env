@@ -50,6 +50,14 @@ describe('config variable', () => {
 			expect(await testEnv.get('DOCKERSECRET99')).to.be.eql(Err(new VariableLookupError('DOCKERSECRET99', 'Missing required value for key: DOCKERSECRET99')));
 		});
 	});
+	describe('error handling', () => {
+		it('should give error if not found', async function () {
+			const loader = new DockerSecretsConfigLoader({fileLowerCase: true, isSilent: false, path: secretsPath});
+			await expect(loader.getValueResult('NOT_FOUND')).resolves.to.be.eql(
+				Err(new VariableLookupError('NOT_FOUND', `ConfigVariables[docker-secrets]: NOT_FOUND from ${path.join(secretsPath, 'not_found')} not found`)),
+			);
+		});
+	});
 	describe('Test module loading', () => {
 		it('test CJS loading', () => {
 			const {DockerSecretsConfigLoader} = require('@luolapeikko/core-env-container');

@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-fetch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fetch loader for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -50,7 +50,7 @@
   },
   "peerDependencies": {
     "@avanio/logger-like": ">= 0.1.0",
-    "@luolapeikko/core-env": ">= 0.0.1",
+    "@luolapeikko/core-env": ">=0.0.2",
     "@luolapeikko/core-ts-error": ">= 0.0.4",
     "@luolapeikko/core-ts-loadable": ">= 0.0.4",
     "@luolapeikko/core-ts-record": ">= 0.0.4",

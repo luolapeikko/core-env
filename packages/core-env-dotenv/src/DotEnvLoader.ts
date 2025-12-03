@@ -5,9 +5,8 @@ import {
 	type AbstractFileMapLoaderOptions,
 	abstractFileMapLoaderLogMap,
 } from '@luolapeikko/core-env-nodejs';
-import {ErrorCast} from '@luolapeikko/core-ts-error';
 import type {Loadable} from '@luolapeikko/core-ts-type';
-import {Err, type IResult, Ok} from '@luolapeikko/result-option';
+import {type IResult, Ok} from '@luolapeikko/result-option';
 import {parse} from 'dotenv';
 /**
  * Loader for dotenv files, using the `dotenv` packages parser.
@@ -39,11 +38,13 @@ export class DotEnvLoader<OverrideMap extends OverrideKeyMap = OverrideKeyMap> e
 		this.loaderType = type;
 	}
 
+	/**
+	 * Parses the raw data from the file.
+	 * @param rawData The raw data from the file.
+	 * @returns The parsed data.
+	 * @see https://github.com/motdotla/dotenv/blob/master/lib/main.js#L52
+	 */
 	protected handleParse(rawData: Buffer): IResult<Record<string, string | undefined>, Error> {
-		try {
-			return Ok(parse(rawData));
-		} catch (err) {
-			return Err(ErrorCast.from(err));
-		}
+		return Ok(parse(rawData));
 	}
 }

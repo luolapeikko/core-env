@@ -90,7 +90,7 @@ export abstract class AbstractFileMapLoader<
 	}
 
 	async #handleFileChange(options: Options): Promise<void> {
-		(await this.reload())
+		return (await this.reload())
 			.inspectOk(() => {
 				this.logger.logKey('load', this.buildLogStr(`reloaded file ${options.fileName} due to change`));
 			})
@@ -129,10 +129,6 @@ export abstract class AbstractFileMapLoader<
 	}
 
 	async #readFileResult(options: Options): Promise<IResult<Buffer, VariableError>> {
-		if (options.disabled) {
-			this.logger.logKey('load', this.buildLogStr(`loader for file ${options.fileName} is disabled`));
-			return Ok(Buffer.from('{}'));
-		}
 		this.logger.logKey('load', this.buildLogStr(`loading file ${options.fileName}`));
 		try {
 			return Ok(await readFile(options.fileName));
@@ -142,10 +138,7 @@ export abstract class AbstractFileMapLoader<
 	}
 
 	protected fileExists(path: PathLike): IResult<void, Error> {
-		if (!existsSync(path)) {
-			return Err(new VariableError(this.buildLogStr(`file ${path} not found`)));
-		}
-		return Ok();
+		return existsSync(path) ? Ok() : Err(new VariableError(this.buildLogStr(`file ${path} not found`)));
 	}
 
 	/**

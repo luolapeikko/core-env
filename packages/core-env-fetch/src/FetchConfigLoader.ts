@@ -79,16 +79,20 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 			this.getOptions(),
 			() => this.#getRequest(),
 			(_options, req) => this.#fetchRequestOrCacheResponse(req),
-			async ({logger, isSilent, payload}, req, res) => {
+			async ({logger, isSilent, payload, cache}, req, res) => {
 				const path = urlSanitize(req.url); // hide username/passwords from URL in logs
 				if (!res) {
-					logger?.info(this.buildLogStr(`client is offline and does not have cached response [${path}]`));
+					if (!cache?.isOnline()) {
+						logger?.info(this.buildLogStr(`client is offline and does not have cached response [${path}]`));
+					}
 					return Ok(false);
 				}
 				const contentType = res.headers.get('content-type');
 				if (contentType?.startsWith('application/json') && payload === 'json') {
-					return (await this.#handleDataLoading(res)).inspectOk(() => {
-						logger?.debug(this.buildLogStr(`successfully loaded config ${path}`));
+					return (await this.#handleDataLoading(res)).inspectOk((isLoaded) => {
+						if (isLoaded) {
+							logger?.debug(this.buildLogStr(`successfully loaded config ${path}`));
+						}
 					});
 				}
 				if (isSilent) {
@@ -108,9 +112,9 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 	#fetchRequestOrCacheResponse(req: Request): Promise<IResult<Response | undefined, Error>> {
 		return Result.asyncTupleFlow(
 			this.getOptions(),
-			() => this.#getCacheResponse(req),
+			(options) => this.#getCacheResponse(req, options),
 			(options, cacheRes) => {
-				if (cacheRes) {
+				if (cacheRes && !options.cache?.isOnline()) {
 					options.logger?.debug(this.buildLogStr(`returning cached response from ${urlSanitize(req.url)}`));
 					return Ok(cacheRes);
 				}
@@ -126,22 +130,20 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 				.inspectErr((err) => {
 					logger?.warn(this.buildLogStr(`failed to fetch error: ${err.message}`), err);
 				})
-				.orElse(() => Ok(cacheRes)),
+				.orElse(() => Ok(undefined)),
 			async (res) => {
-				if (res?.ok && cache) {
-					(await cache.storeRequest(req, res))
-						.inspectOk(() => {
-							logger?.debug(this.buildLogStr('stored response in cache'));
-						})
-						.inspectErr((error) => {
-							logger?.warn(this.buildLogStr(`failed to store response in cache: ${error.message}`));
-						});
+				if (res) {
+					if (res.ok && cache) {
+						(await cache.storeRequest(req, res))
+							.inspectOk(() => logger?.debug(this.buildLogStr('stored response in cache')))
+							.inspectErr((error) => logger?.warn(this.buildLogStr(`failed to store response in cache: ${error.message}`)));
+					}
+					// if we have a cached response and we get a cache hit code (default 304) or an error, return the cached response
+					if (res.status === cacheHitHttpCode || res.status >= 400) {
+						return Ok(cacheRes);
+					}
 				}
-				// if we have a cached response and we get a cache hit code (default 304) or an error, return the cached response
-				if (res && (res.status === cacheHitHttpCode || res.status >= 400)) {
-					return Ok(cacheRes);
-				}
-				return Ok(res);
+				return Ok(res ?? cacheRes);
 			},
 		);
 	}
@@ -152,30 +154,30 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 	#handleDataLoading(res: Response): Promise<IResult<boolean, Error>> {
 		return Result.asyncTupleFlow(
 			this.#handleJsonMap(res),
-			(data) => this.initData(data),
-			() => Ok(true),
+			({data}) => this.initData(data),
+			({isLoaded}) => Ok(isLoaded),
 		);
 	}
 
 	/**
 	 * get cached response if available
 	 */
-	#getCacheResponse(req: Request): Promise<IResult<Response | undefined, Error>> {
+	#getCacheResponse(req: Request, {logger}: FetchConfigLoaderOptions): Promise<IResult<Response | undefined, Error>> {
 		return Result.asyncTupleFlow(this.getOptions(), async ({cache}) => {
-			if (cache && !cache.isOnline()) {
-				return (await cache.getRequest(req)).andThen((res) => {
-					if (res) {
-						if (!cache.isOnline()) {
-							return Ok(res);
+			if (cache) {
+				return (await cache.getRequest(req))
+					.inspectErr((cause) => logger?.warn(this.buildLogStr(`failed to get cached response: ${cause.message}`), cause))
+					.andThen((res) => {
+						if (res) {
+							// add ETag header for cache validation
+							const etag = res.headers.get('etag');
+							if (etag) {
+								req.headers.set('If-None-Match', etag);
+							}
 						}
-						// add ETag header for cache validation
-						const etag = res.headers.get('etag');
-						if (etag) {
-							req.headers.set('If-None-Match', etag);
-						}
-					}
-					return Ok(undefined);
-				});
+						return Ok(res);
+					})
+					.orElse(() => Ok(undefined));
 			}
 			return Ok(undefined);
 		});
@@ -198,13 +200,9 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 	/**
 	 * Read response JSON and push to map
 	 */
-	#handleJsonMap(res: Response): Promise<IResult<Map<string, string>, Error>> {
+	#handleJsonMap(res: Response): Promise<IResult<{data: Map<string, string>; isLoaded: boolean}, Error>> {
 		return Result.asyncTupleFlow(this.getOptions(), async ({validate, isSilent, logger}) => {
 			try {
-				const contentType = res.headers.get('content-type');
-				if (!contentType?.startsWith('application/json')) {
-					return Err(new Error(this.buildLogStr(`unsupported content-type ${String(contentType)}`)));
-				}
 				const rawData: unknown = await res.json();
 				if (!RecordCore.is(rawData)) {
 					return Err(new Error(this.buildLogStr(`response is not a valid JSON object`)));
@@ -216,14 +214,17 @@ export class FetchConfigLoader<OverrideMap extends OverrideKeyMap = OverrideKeyM
 						const issues = validateRes.issues.map((issue) => `- ${issue.message} ${issue.path ? `(path: ${issue.path.join('.')})` : ''}`);
 						return Err(new VariableError(this.buildLogStr(`validation failed:\n${issues.join('\n')}`)));
 					}
-					return Ok(Object.entries(validateRes.value).reduce<Map<string, string>>((acc, [key, value]) => acc.set(key, value), new Map()));
+					return Ok({
+						data: Object.entries(validateRes.value).reduce<Map<string, string>>((acc, [key, value]) => acc.set(key, value), new Map()),
+						isLoaded: true,
+					});
 				}
-				return Ok(Object.entries(data).reduce<Map<string, string>>((acc, [key, value]) => acc.set(key, value), new Map()));
+				return Ok({data: Object.entries(data).reduce<Map<string, string>>((acc, [key, value]) => acc.set(key, value), new Map()), isLoaded: true});
 			} catch (error) {
 				const err = ErrorCast.from(error);
 				if (isSilent) {
 					logger?.info(this.buildLogStr(`JSON error: ${err.message}`));
-					return Ok(new Map()); // set as empty so we prevent fetch spamming
+					return Ok({data: new Map(), isLoaded: false}); // set as empty so we prevent fetch spamming
 				}
 				return Err(new VariableError(this.buildLogStr(`JSON error: ${err.message}`)));
 			}

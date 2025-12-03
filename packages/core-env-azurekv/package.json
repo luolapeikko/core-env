@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-azurekv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Azure Key Vault loaders for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -52,7 +52,7 @@
     "@avanio/logger-like": ">= 0.1.0",
     "@azure/identity": ">= 4.0.0",
     "@azure/keyvault-secrets": ">= 4.0.0",
-    "@luolapeikko/core-env": ">= 0.0.1",
+    "@luolapeikko/core-env": ">=0.0.2",
     "@luolapeikko/core-ts-error": ">= 0.0.4",
     "@luolapeikko/core-ts-type": ">= 0.0.4",
     "@luolapeikko/result-option": ">= 2.1.1"
