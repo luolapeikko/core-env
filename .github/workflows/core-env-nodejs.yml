@@ -1,4 +1,6 @@
 name: core-env-nodejs CI
+permissions:
+  contents: read
 on:
   push:
     branches: [main]

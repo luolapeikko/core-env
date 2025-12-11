@@ -1,4 +1,6 @@
 name: Module Common CI
+permissions:
+  contents: read
 on:
   workflow_call:
     inputs:
