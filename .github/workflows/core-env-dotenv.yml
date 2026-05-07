@@ -1,6 +1,4 @@
 name: core-env-dotenv CI
-permissions:
-  contents: read
 on:
   push:
     branches: [main]
@@ -8,6 +6,10 @@ on:
       - "packages/core-env-dotenv/**"
       - ".github/workflows/core-env-dotenv.yml"
       - ".github/workflows/module.yml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   module-flow:

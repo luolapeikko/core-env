@@ -1,6 +1,4 @@
 name: core-env-vite CI
-permissions:
-  contents: read
 on:
   push:
     branches: [main]
@@ -8,6 +6,10 @@ on:
       - "packages/core-env-vite/**"
       - ".github/workflows/core-env-vite.yml"
       - ".github/workflows/module.yml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   module-flow:

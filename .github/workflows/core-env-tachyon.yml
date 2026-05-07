@@ -1,6 +1,4 @@
 name: core-env-tachyon CI
-permissions:
-  contents: read
 on:
   push:
     branches: [main]
@@ -8,6 +6,10 @@ on:
       - "packages/core-env-tachyon/**"
       - ".github/workflows/core-env-tachyon.yml"
       - ".github/workflows/module.yml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   module-flow:

@@ -1,6 +1,4 @@
 name: core-env-fetch CI
-permissions:
-  contents: read
 on:
   push:
     branches: [main]
@@ -8,6 +6,10 @@ on:
       - "packages/core-env-fetch/**"
       - ".github/workflows/core-env-fetch.yml"
       - ".github/workflows/module.yml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   module-flow:

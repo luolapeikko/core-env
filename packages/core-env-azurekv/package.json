@@ -39,10 +39,7 @@
   ],
   "author": "mharj",
   "license": "LGPL-2.1-only",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/luolapeikko/core-ts.git"
-  },
+  "repository": "github:luolapeikko/core-env",
   "packageManager": "pnpm@10.17.1",
   "devDependencies": {
     "@luolapeikko/core-env": "workspace:*"

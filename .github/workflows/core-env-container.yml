@@ -1,6 +1,4 @@
 name: core-env-container CI
-permissions:
-  contents: read
 on:
   push:
     branches: [main]
@@ -8,6 +6,10 @@ on:
       - "packages/core-env-container/**"
       - ".github/workflows/core-env-container.yml"
       - ".github/workflows/module.yml"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 jobs:
   module-flow:
