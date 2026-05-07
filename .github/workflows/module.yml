@@ -1,12 +1,14 @@
 name: Module Common CI
-permissions:
-  contents: read
 on:
   workflow_call:
     inputs:
       package-path:
         required: true
         type: string
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
 
 env:
   # Setting an environment variable with the value of a configuration variable
