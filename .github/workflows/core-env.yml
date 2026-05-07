@@ -7,6 +7,10 @@ on:
       - ".github/workflows/core-env.yml"
       - ".github/workflows/module.yml"
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   module-flow:
     uses: ./.github/workflows/module.yml
