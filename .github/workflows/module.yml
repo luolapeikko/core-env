@@ -50,12 +50,6 @@ jobs:
         if: env.HAVE_LINT_SCRIPT == 'true'
         run: pnpm run lint
 
-      - name: Verify npm authentication
-        working-directory: ${{ inputs.package-path }}
-        run: |
-          npm whoami
-          npm ping
-
       - name: Publish ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}
         working-directory: ${{ inputs.package-path }}
         if: |
