@@ -1,5 +1,14 @@
 # @luolapeikko/core-env-dotenv
 
+## 0.0.3
+
+### Patch Changes
+
+- Dev deps and peer deps
+- Updated dependencies
+  - @luolapeikko/core-env@0.0.3
+  - @luolapeikko/core-env-nodejs@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes

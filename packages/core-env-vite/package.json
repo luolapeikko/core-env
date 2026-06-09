@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-vite",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vite loader for EnvKit",
   "type": "module",
   "module": "./dist/index.js",
@@ -41,7 +41,7 @@
     "@luolapeikko/core-env": "workspace:*"
   },
   "peerDependencies": {
-    "@luolapeikko/core-env": ">=0.0.2",
+    "@luolapeikko/core-env": ">=0.0.3",
     "@luolapeikko/result-option": ">= 2.1.1",
     "vite": ">= 6.0.0"
   }

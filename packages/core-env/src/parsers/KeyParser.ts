@@ -1,9 +1,8 @@
 import type {Awaitable} from '@luolapeikko/core-ts-type';
-import type {IResult} from '@luolapeikko/result-option';
+import {type IResult, Result} from '@luolapeikko/result-option';
 import type {StandardSchemaV1} from '@standard-schema/spec';
 import type {IConfigParser} from '../interfaces';
 import {buildLogValue} from '../lib/formatUtils';
-import {resultAll} from '../lib/resultUtils';
 import {isStandardSchema, stdValidateResult} from '../lib/standardSchema';
 import {ValidateCore} from '../lib/ValidateCore';
 import type {KeyFormatType, ObjectEntries, ValueLogFormat} from '../types';
@@ -149,7 +148,7 @@ export class KeyParser {
 		const parserInstance = isStandard ? stdValidateResult<T>(parser) : parser.parse;
 		return {
 			name: `arrayParser[${isStandard ? 'standard schema' : parser.name}]`,
-			parse: async (value) => resultAll(await Promise.all(value.split(separator).map(parserInstance))),
+			parse: async (value) => Result.asArray(await Promise.all(value.split(separator).map(parserInstance))),
 			toLogString: (value, format) => buildLogValue(value.join(separator), format),
 			toString: (value) => value.join(separator),
 		};
