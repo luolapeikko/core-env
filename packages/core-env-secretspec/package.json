@@ -1,0 +1,53 @@
+{
+  "name": "@luolapeikko/core-env-secretspec",
+  "version": "0.0.3",
+  "description": "SecretSpec loader for EnvKit",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown src/index.ts --sourcemap --format cjs,esm --dts --clean -c tsconfig.build.json",
+    "validate": "tsc --noEmit"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "variables",
+    "config",
+    "configuration",
+    "loader",
+    "parser",
+    "typescript",
+    "schema",
+    "validation",
+    "envkit",
+    "SecretSpec"
+  ],
+  "author": "mharj",
+  "license": "LGPL-2.1-only",
+  "repository": "github:luolapeikko/core-env",
+  "packageManager": "pnpm@10.17.1",
+  "devDependencies": {
+    "@luolapeikko/core-env": "workspace:*"
+  },
+  "peerDependencies": {
+    "@luolapeikko/core-env": ">=0.0.3",
+    "@luolapeikko/result-option": ">= 2.1.1",
+    "secretspec": ">= 0.14.0"
+  }
+}

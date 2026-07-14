@@ -16,6 +16,7 @@ This is a rewrite for older [@avanio/variable-util](https://github.com/mharj/var
 - **[@luolapeikko/core-env-vite](packages/core-env-vite/README.md)** - Vite loader
 - **[@luolapeikko/core-env-tachyon](packages/core-env-tachyon/README.md)** - Tachyon loader
 - **[@luolapeikko/core-env-fetch](packages/core-env-fetch/README.md)** - Fetch loader
+- **[@luolapeikko/core-env-secretspec](packages/core-env-secretspec/README.md)** - SecretSpec loader
 
 ## Example for backend application
 

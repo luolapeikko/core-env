@@ -4,3 +4,5 @@ packages:
 onlyBuiltDependencies:
   - esbuild
 
+overrides:
+  "@luolapeikko/result-option": "2.4.0"

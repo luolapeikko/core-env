@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@luolapeikko/result-option': 2.4.0
+
 importers:
 
   .:
@@ -40,8 +43,8 @@ importers:
         specifier: ^0.0.6
         version: 0.0.6
       '@luolapeikko/result-option':
-        specifier: ^2.2.3
-        version: 2.2.3
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       '@standard-schema/spec':
         specifier: ^1.1.0
         version: 1.1.0
@@ -65,7 +68,7 @@ importers:
         version: 1.8.1
       tachyon-drive:
         specifier: ^2.0.0
-        version: 2.0.0(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.2.3)(@luolapeikko/ts-common@1.1.3)
+        version: 2.0.0(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.4.0(core-result@0.0.2))(@luolapeikko/ts-common@1.1.3)
       tsdown:
         specifier: ^0.22.2
         version: 0.22.2(typescript@6.0.3)(unrun@0.2.39)
@@ -109,8 +112,8 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       '@standard-schema/spec':
         specifier: '>= 1.0.0'
         version: 1.0.0
@@ -136,8 +139,8 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -152,8 +155,8 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -165,8 +168,8 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       dotenv:
         specifier: '>= 17'
         version: 17.2.3
@@ -196,8 +199,8 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       '@standard-schema/spec':
         specifier: '>= 1.0.0'
         version: 1.0.0
@@ -221,8 +224,21 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
+    devDependencies:
+      '@luolapeikko/core-env':
+        specifier: workspace:*
+        version: link:../core-env
+
+  packages/core-env-secretspec:
+    dependencies:
+      '@luolapeikko/result-option':
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
+      secretspec:
+        specifier: '>= 0.14.0'
+        version: 0.14.0
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -240,14 +256,14 @@ importers:
         specifier: '>= 0.0.4'
         version: 0.0.4
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       '@standard-schema/spec':
         specifier: '>= 1.0.0'
         version: 1.0.0
       tachyon-drive:
         specifier: '>= 0.11.0'
-        version: 0.11.5(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.1.1)(@luolapeikko/ts-common@1.1.3)
+        version: 0.11.5(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.4.0(core-result@0.0.2))(@luolapeikko/ts-common@1.1.3)
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -256,8 +272,8 @@ importers:
   packages/core-env-vite:
     dependencies:
       '@luolapeikko/result-option':
-        specifier: '>= 2.1.1'
-        version: 2.1.1
+        specifier: 2.4.0
+        version: 2.4.0(core-result@0.0.2)
       vite:
         specifier: '>= 6.0.0'
         version: 7.2.1(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.9.0)
@@ -762,11 +778,10 @@ packages:
   '@luolapeikko/core-ts-type@0.0.6':
     resolution: {integrity: sha512-FPRW/x60EaJQcR0MX0sEF+cJtvGGHhY1H5mSJIvtyrjHO8oR7Qy6F1Msp63/9bAdZ2UqRTtgdozHbSKdSt4bsA==}
 
-  '@luolapeikko/result-option@2.1.1':
-    resolution: {integrity: sha512-jijEM7oPACJOTQafGSFjvYX4zhb1o5RXhFyFMrtDm74FngOXe8zA8CYiBo4FFz4FObXVEI5oA1xSyClHRh3DPw==}
-
-  '@luolapeikko/result-option@2.2.3':
-    resolution: {integrity: sha512-PkJSEGSp+wEM2yhyNVh/nAqOaEKrQ47hCxV05wsG9ZYDC8Q3YM0qHP85nJo0atRyZPMtO1zqQ84NSySYBtKs6A==}
+  '@luolapeikko/result-option@2.4.0':
+    resolution: {integrity: sha512-Z+Eug2E0aRgYcpkmGpTWQQwbWcRUVubkVQonwOA72+mQY+UBSh4U4OU7/Rt/p/FWwHrFlUPp/hmxMXYVebxd8w==}
+    peerDependencies:
+      core-result: ^0.0.2
 
   '@luolapeikko/ts-common@1.1.3':
     resolution: {integrity: sha512-fC2JwiN+ptuTc4UQ8F4Pvv0baxeiF5aWH5Qn9taO673tDhVD8sFAbmIC8n7PLiWcA34wYOPBxQsVFH/w1sFaNg==}
@@ -1424,6 +1439,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
+  core-result@0.0.2:
+    resolution: {integrity: sha512-pd98gNATWLixfIwW9+GPla32hPDCIJdi/nv7p7M8WKEkkkcIHU7PHREyYZw/sjeSsO7asepzU5HfOGNpK4BmnQ==}
+
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -2060,6 +2078,31 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  secretspec-darwin-arm64@0.14.0:
+    resolution: {integrity: sha512-4wZD5ORxrEsLA8hAb1DatKDh2Ctjg3eV5Bybtx3xqctEzpxOLD3ZsBCOoIsfuP30X/dPg0Hhb3BqgCe/pfnz3A==}
+    cpu: [arm64]
+    os: [darwin]
+
+  secretspec-linux-arm64-gnu@0.14.0:
+    resolution: {integrity: sha512-1hDOHnmR3TM7iWYHkv9yk3YAMA5EqraX0VamxMtk6ufnqXbpUNcCUgQarbBAWxUyc79INAi/+Ay4uElgzjAC4w==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  secretspec-linux-x64-gnu@0.14.0:
+    resolution: {integrity: sha512-T7/HagiIOkajUyglK+5OZXTodXLsB9RLXMzGcexTHvdWJQ2fbotD83xfZZr7QG4tiln9UlFAEY08ApSRvCTzuw==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  secretspec-win32-x64-msvc@0.14.0:
+    resolution: {integrity: sha512-4BNFtKCOjAy2Br+DyIQ/IKzMsEH9b2yem4CgzWD7vASpl45+pYwKs/B7YBR8V1CaH+mp1F+mO212kicoZv4lkA==}
+    cpu: [x64]
+    os: [win32]
+
+  secretspec@0.14.0:
+    resolution: {integrity: sha512-212IgWRB2z89nYkPPFxPLCIOHamC7Wto4BbxWP592hsdt6z1yNLKQ5UZ6RctrwOHggNtAQse2x0L5PHcjhltng==}
+
   semver@7.8.1:
     resolution: {integrity: sha512-rkVq3IXh+4FDGch+KwzX3aV9W3kO54GyEgpvBzSyctDA6Xtd7RJQV1xmXbeQp5v7+VzLOfVqiutSE6GICgPFvg==}
     engines: {node: '>=10'}
@@ -2120,14 +2163,14 @@ packages:
     resolution: {integrity: sha512-E8xb/ZBPpIccF41YXN0ulDPTY0Ls6T05T90yBkBu7J1I54AbCDCOtvw4HWRswimyLmGcwBqEIZa+/LulyAeTfA==}
     peerDependencies:
       '@avanio/logger-like': '>= 0.2.10'
-      '@luolapeikko/result-option': '>= 1.0.0'
+      '@luolapeikko/result-option': 2.4.0
       '@luolapeikko/ts-common': '>= 0.1.0'
 
   tachyon-drive@2.0.0:
     resolution: {integrity: sha512-lZlYCIdQKzvxe1c2tTjSkMTK7A77BFNkSEenH115KsrsZ5PWj74yIUoijAuJEPCgKwRPdkPm8tnnJCL10bNVHA==}
     peerDependencies:
       '@avanio/logger-like': '>= 0.2.10'
-      '@luolapeikko/result-option': '>= 1.0.0'
+      '@luolapeikko/result-option': 2.4.0
       '@luolapeikko/ts-common': '>= 0.1.0'
 
   term-size@2.2.1:
@@ -3019,9 +3062,9 @@ snapshots:
 
   '@luolapeikko/core-ts-type@0.0.6': {}
 
-  '@luolapeikko/result-option@2.1.1': {}
-
-  '@luolapeikko/result-option@2.2.3': {}
+  '@luolapeikko/result-option@2.4.0(core-result@0.0.2)':
+    dependencies:
+      core-result: 0.0.2
 
   '@luolapeikko/ts-common@1.1.3': {}
 
@@ -3509,6 +3552,8 @@ snapshots:
   color-name@1.1.4: {}
 
   convert-source-map@2.0.0: {}
+
+  core-result@0.0.2: {}
 
   cross-spawn@7.0.6:
     dependencies:
@@ -4145,6 +4190,25 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
+  secretspec-darwin-arm64@0.14.0:
+    optional: true
+
+  secretspec-linux-arm64-gnu@0.14.0:
+    optional: true
+
+  secretspec-linux-x64-gnu@0.14.0:
+    optional: true
+
+  secretspec-win32-x64-msvc@0.14.0:
+    optional: true
+
+  secretspec@0.14.0:
+    optionalDependencies:
+      secretspec-darwin-arm64: 0.14.0
+      secretspec-linux-arm64-gnu: 0.14.0
+      secretspec-linux-x64-gnu: 0.14.0
+      secretspec-win32-x64-msvc: 0.14.0
+
   semver@7.8.1: {}
 
   shebang-command@2.0.0:
@@ -4188,16 +4252,16 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  tachyon-drive@0.11.5(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.1.1)(@luolapeikko/ts-common@1.1.3):
+  tachyon-drive@0.11.5(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.4.0(core-result@0.0.2))(@luolapeikko/ts-common@1.1.3):
     dependencies:
       '@avanio/logger-like': 0.2.12
-      '@luolapeikko/result-option': 2.1.1
+      '@luolapeikko/result-option': 2.4.0(core-result@0.0.2)
       '@luolapeikko/ts-common': 1.1.3
 
-  tachyon-drive@2.0.0(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.2.3)(@luolapeikko/ts-common@1.1.3):
+  tachyon-drive@2.0.0(@avanio/logger-like@0.2.12)(@luolapeikko/result-option@2.4.0(core-result@0.0.2))(@luolapeikko/ts-common@1.1.3):
     dependencies:
       '@avanio/logger-like': 0.2.12
-      '@luolapeikko/result-option': 2.2.3
+      '@luolapeikko/result-option': 2.4.0(core-result@0.0.2)
       '@luolapeikko/ts-common': 1.1.3
 
   term-size@2.2.1: {}

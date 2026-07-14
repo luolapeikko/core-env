@@ -15,7 +15,7 @@
     "@luolapeikko/core-ts-loadable": "^0.0.6",
     "@luolapeikko/core-ts-record": "^0.0.6",
     "@luolapeikko/core-ts-type": "^0.0.6",
-    "@luolapeikko/result-option": "^2.2.3",
+    "@luolapeikko/result-option": "^2.4.0",
     "@standard-schema/spec": "^1.1.0",
     "@types/etag": "^1.8.4",
     "@types/node": "^24.12.4",

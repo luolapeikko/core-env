@@ -15,6 +15,9 @@
       ],
       "@luolapeikko/core-env-tachyon": [
         "packages/core-env-tachyon/src/index.ts"
+      ],
+      "@luolapeikko/core-env-secretspec": [
+        "packages/core-env-secretspec/src/index.ts"
       ]
     }
   }

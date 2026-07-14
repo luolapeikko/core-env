@@ -8,6 +8,7 @@
     { "path": "./packages/core-env-vite" },
     { "path": "./packages/core-env-fetch" },
     { "path": "./packages/core-env-azurekv" },
-    { "path": "./packages/core-env-tachyon" }
+    { "path": "./packages/core-env-tachyon" },
+    { "path": "./packages/core-env-secretspec" }
   ]
 }
