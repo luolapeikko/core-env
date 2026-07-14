@@ -2,6 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directories:
+      - "/"
       - "/packages/core-env"
       - "/packages/core-env-azurekv"
       - "/packages/core-env-container"
@@ -10,6 +11,7 @@ updates:
       - "/packages/core-env-nodejs"
       - "/packages/core-env-tachyon"
       - "/packages/core-env-vite"
+      - "/packages/core-env-secretspec"
     schedule:
       interval: "weekly"
     allow:
