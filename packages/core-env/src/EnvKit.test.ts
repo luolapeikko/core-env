@@ -144,6 +144,72 @@ describe('Test formatUtils', function () {
 			]);
 		});
 	});
+	describe('cache helpers', function () {
+		function createCachedConfig() {
+			const loader = new MemoryLoader({initialData: {key1: 'cached-one', key2: 'true'}});
+			const kit = new EnvKit<Pick<EnvConfig, 'key1' | 'key2'>>(
+				{
+					key1: {
+						notFoundError: true,
+						parser: KeyParser.String(),
+					},
+					key2: {
+						notFoundError: true,
+						parser: KeyParser.Boolean(),
+					},
+				},
+				[loader],
+			);
+
+			return {kit, loader};
+		}
+
+		it('should ensure entries into the cache', async function () {
+			const {kit} = createCachedConfig();
+
+			await expect(kit.ensure(['key1', 'key2'])).to.resolves.toStrictEqual(Ok());
+		});
+
+		it('should return first cache miss error when reading without ensure or get', function () {
+			const {kit} = createCachedConfig();
+
+			expect(kit.readEntry('key1')).toStrictEqual(
+				Err(new VariableLookupError('key1', `Key "key1" is not cached, check if ensure('key1') was called first`)),
+			);
+		});
+
+		it('should read cached values after ensure', async function () {
+			const {kit, loader} = createCachedConfig();
+
+			await expect(kit.ensure(['key1', 'key2'])).to.resolves.toStrictEqual(Ok());
+
+			await loader.set('key1', 'cached-two');
+			await loader.set('key2', 'false');
+
+			expect(kit.readEntry('key1')).toStrictEqual(Ok({loaderType: 'memory', path: 'key:key1', value: 'cached-one'}));
+			expect(kit.read('key1')).toStrictEqual(Ok('cached-one'));
+			expect(kit.readString('key1')).toStrictEqual(Ok('cached-one'));
+
+			expect(kit.readEntry('key2')).toStrictEqual(Ok({loaderType: 'memory', path: 'key:key2', value: true}));
+			expect(kit.read('key2')).toStrictEqual(Ok(true));
+			expect(kit.readString('key2')).toStrictEqual(Ok('true'));
+		});
+
+		it('should return error from ensure when required key is missing', async function () {
+			const loader = new MemoryLoader();
+			const kit = new EnvKit<{key1: string}>(
+				{
+					key1: {
+						notFoundError: true,
+						parser: KeyParser.String(),
+					},
+				},
+				[loader],
+			);
+
+			await expect(kit.ensure('key1')).to.resolves.toStrictEqual(Err(new VariableLookupError('key1', 'Missing required value for key: key1')));
+		});
+	});
 	describe('Test module loading', () => {
 		it('test CJS loading', () => {
 			const {EnvKit} = require('@luolapeikko/core-env');

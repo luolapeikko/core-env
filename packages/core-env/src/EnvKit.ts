@@ -1,7 +1,7 @@
 import {type ILoggerLike, LogLevel, type LogLevelValue, type LogMapInfer, MapLogger} from '@avanio/logger-like';
 import {LoadableCore} from '@luolapeikko/core-ts-loadable';
 import type {Loadable} from '@luolapeikko/core-ts-type';
-import {Err, type IResult, Ok} from '@luolapeikko/result-option';
+import {Err, type IErr, type IResult, Ok} from '@luolapeikko/result-option';
 import type {IConfigLoader, LoaderValueResult} from './interfaces';
 import type {ConfigSchema} from './types';
 import {VariableLookupError} from './VariableLookupError';
@@ -36,6 +36,9 @@ export type RawValueResult = {loaderType?: string; path?: string} & LoaderValueR
  */
 export type InferValueResult<K> = undefined extends K ? {loaderType?: string; path?: string; value?: K} : {loaderType?: string; path?: string; value: K};
 
+export type InferValue<K> = undefined extends K ? K | undefined : K;
+
+export type InferValueString<K> = undefined extends K ? string | undefined : string;
 /**
  * Result entry list type
  * @category Core
@@ -81,6 +84,7 @@ export class EnvKit<Data extends Record<string, unknown>> {
 	#schema: ConfigSchema<Data>;
 	#options: EnvKitOptions;
 	#loaders: Iterable<Loadable<IConfigLoader>>;
+	#cachedEntries = new Map<keyof Data, InferValueResult<Data[keyof Data]>>();
 	public constructor(
 		schema: ConfigSchema<Data>,
 		loaders: Iterable<Loadable<IConfigLoader>>,
@@ -99,7 +103,13 @@ export class EnvKit<Data extends Record<string, unknown>> {
 	 */
 	public async getEntry<K extends keyof Data>(lookupKey: K): Promise<IResult<InferValueResult<Data[K]>, Error>> {
 		const schema = this.#schema[lookupKey];
-		return (await this.#getEntry(lookupKey)).inspectOk((data) => this.#printLog(lookupKey, data, schema));
+		return (await this.#getEntry(lookupKey)).inspectOk((data) => {
+			// update cached entry if it already exists
+			if (this.#cachedEntries.has(lookupKey)) {
+				this.#cachedEntries.set(lookupKey, data as InferValueResult<Data[keyof Data]>);
+			}
+			this.#printLog(lookupKey, data, schema);
+		});
 	}
 
 	/**
@@ -118,7 +128,7 @@ export class EnvKit<Data extends Record<string, unknown>> {
 	 */
 	public async getString<K extends keyof Data>(lookupKey: K): Promise<IResult<string | undefined, Error>> {
 		const schema = this.#schema[lookupKey];
-		return (await this.getEntry(lookupKey)).andThen((data: InferValueResult<Data[K]>) => Ok(data.value && schema.parser.toString(data.value)));
+		return (await this.get(lookupKey)).andThen((data) => Ok(data && schema.parser.toString(data)));
 	}
 
 	async #getEntry<K extends keyof Data>(lookupKey: K): Promise<IResult<InferValueResult<Data[K]>, Error>> {
@@ -160,6 +170,56 @@ export class EnvKit<Data extends Record<string, unknown>> {
 			const res = await loader.getValueResult(lookupKey as string);
 			yield {error: res.err(), loaderType: loader.loaderType, path: res.ok()?.path, value: res.ok()?.value};
 		}
+	}
+
+	/**
+	 * Ensure that the specified keys are loaded and cached in the EnvKit. If any key fails to load, the error will be returned.
+	 * @param {keyof Data | Iterable<keyof Data>} lookupKeys - The key or iterable of keys to ensure are loaded.
+	 * @param {EncodeOptions} [encodeOptions] - Optional encode options to use when loading the keys.
+	 * @returns {Promise<IResult<void>>} - A promise that resolves to an IResult indicating success or failure. If any key fails to load, the error will be returned.
+	 */
+	public async ensure(lookupKeys: keyof Data | Iterable<keyof Data>): Promise<IResult<void>> {
+		let errorOccurred: IErr<unknown> | undefined;
+		const keysToEnsure = (typeof lookupKeys === 'string' ? [lookupKeys] : lookupKeys) as Iterable<keyof Data>;
+		for (const lookupKey of keysToEnsure) {
+			const data = await this.#getEntry(lookupKey);
+			if (data.isErr) {
+				errorOccurred = data;
+			} else {
+				this.#cachedEntries.set(lookupKey, data.ok());
+			}
+		}
+		return errorOccurred ?? Ok();
+	}
+
+	/**
+	 * Read the cached configuration value for the given key. (use {@link ensure} to load/reload the value first)
+	 * @param {K} lookupKey - The key to look up in the configuration schema.
+	 * @returns {LoaderTypeValueStrict<Data[Key]>} - The cached configuration entry.
+	 * @throws {VariableLookupError} - If the key is not cached, indicating that {@link ensure} was not called first.
+	 * @template K - The type of the key to look up in the configuration schema.
+	 */
+	public readEntry<Key extends keyof Data = keyof Data>(key: Key): IResult<InferValueResult<Data[Key]>, VariableLookupError> {
+		const cachedEntry = this.#cachedEntries.get(key) as InferValueResult<Data[Key]> | undefined;
+		if (cachedEntry) {
+			return Ok<InferValueResult<Data[Key]>>(cachedEntry);
+		}
+		return Err(new VariableLookupError(String(key), `Key "${String(key)}" is not cached, check if ensure('${String(key)}') was called first`));
+	}
+
+	/**
+	 * Read the cached configuration value for the given key as a Result. (use {@link ensure} to load/reload the value first)
+	 * @param lookupKey
+	 * @returns {IResult<Data[K], VariableLookupError>} - The cached configuration value wrapped in a Result.
+	 * @template K - The type of the key to look up in the configuration schema.
+	 */
+	public read<K extends keyof Data>(lookupKey: K): IResult<InferValue<Data[K]>, VariableLookupError> {
+		return this.readEntry<K>(lookupKey).andThen((data) => Ok<InferValue<Data[K]>>(data.value as InferValue<Data[K]>));
+	}
+
+	public readString<K extends keyof Data>(lookupKey: K): IResult<InferValueString<Data[K]>, VariableLookupError> {
+		const schema = this.#schema[lookupKey];
+		return this.read<K>(lookupKey).andThen((data) => Ok<InferValueString<Data[K]>>(data && schema.parser.toString(data)));
 	}
 
 	async *#getResultIterator<K extends keyof Data>(lookupKey: K): AsyncIterable<IResult<RawValueResult, Error>> {
