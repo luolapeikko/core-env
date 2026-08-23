@@ -1,6 +1,6 @@
 {
   "name": "@luolapeikko/core-env-secretspec",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "SecretSpec loader for EnvKit",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -46,7 +46,7 @@
     "@luolapeikko/core-env": "workspace:*"
   },
   "peerDependencies": {
-    "@luolapeikko/core-env": ">=0.0.3",
+    "@luolapeikko/core-env": ">=0.0.4",
     "@luolapeikko/result-option": ">= 2.1.1",
     "secretspec": ">= 0.14.0"
   }

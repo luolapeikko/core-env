@@ -1,5 +1,13 @@
 # @luolapeikko/core-env-tachyon
 
+## 0.0.4
+
+### Patch Changes
+
+- ensure functionality
+- Updated dependencies
+  - @luolapeikko/core-env@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
