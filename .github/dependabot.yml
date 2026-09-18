@@ -4,6 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      weekly-batch:
+        patterns:
+          - "*"
   - package-ecosystem: "npm"
     directories:
       - "/"
