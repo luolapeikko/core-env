@@ -173,9 +173,7 @@ describe('Test formatUtils', function () {
 		it('should return first cache miss error when reading without ensure or get', function () {
 			const {kit} = createCachedConfig();
 
-			expect(kit.readEntry('key1')).toStrictEqual(
-				Err(new VariableLookupError('key1', `Key "key1" is not cached, check if ensure('key1') was called first`)),
-			);
+			expect(kit.readEntry('key1')).toStrictEqual(Err(new VariableLookupError('key1', `Key "key1" is not cached, check if ensure('key1') was called first`)));
 		});
 
 		it('should read cached values after ensure', async function () {
