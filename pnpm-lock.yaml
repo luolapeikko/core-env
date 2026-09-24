@@ -210,8 +210,8 @@ importers:
         specifier: ^1.8.4
         version: 1.8.4
       '@types/node':
-        specifier: ^24.13.5
-        version: 24.13.5
+        specifier: ^24.13.6
+        version: 24.13.6
       '@vitest/coverage-v8':
         specifier: ^5.0.1
         version: 5.0.1(vitest@5.0.1)
@@ -219,8 +219,8 @@ importers:
         specifier: ^12.0.0
         version: 12.0.0
       dotenv:
-        specifier: ^18.0.0
-        version: 18.0.0
+        specifier: ^18.0.1
+        version: 18.0.1
       etag:
         specifier: ^1.8.1
         version: 1.8.1
@@ -237,8 +237,8 @@ importers:
         specifier: ^0.28.20
         version: 0.28.20(typescript@6.0.3)
       typedoc-plugin-dt-links:
-        specifier: ^2.0.72
-        version: 2.0.72(typedoc@0.28.20(typescript@6.0.3))
+        specifier: ^2.0.73
+        version: 2.0.73(typedoc@0.28.20(typescript@6.0.3))
       typedoc-plugin-mdn-links:
         specifier: ^5.1.1
         version: 5.1.1(typedoc@0.28.20(typescript@6.0.3))
@@ -247,10 +247,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.3.0
-        version: 8.3.0(@types/node@24.13.5)(yaml@2.9.1)
+        version: 8.3.0(@types/node@24.13.6)(yaml@2.9.1)
       vitest:
         specifier: ^5.0.1
-        version: 5.0.1(@types/node@24.13.5)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1))
+        version: 5.0.1(@types/node@24.13.6)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1))
       zod:
         specifier: ^4.6.5
         version: 4.6.5
@@ -330,7 +330,7 @@ importers:
         version: 2.4.0(core-result@0.0.2)
       dotenv:
         specifier: '>= 17'
-        version: 18.0.0
+        version: 18.0.1
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -434,7 +434,7 @@ importers:
         version: 2.4.0(core-result@0.0.2)
       vite:
         specifier: '>= 6.0.0'
-        version: 8.3.0(@types/node@24.13.5)(yaml@2.9.1)
+        version: 8.3.0(@types/node@24.13.6)(yaml@2.9.1)
     devDependencies:
       '@luolapeikko/core-env':
         specifier: workspace:*
@@ -874,8 +874,8 @@ packages:
   '@types/istanbul-lib-coverage@2.0.6':
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
 
-  '@types/node@24.13.5':
-    resolution: {integrity: sha512-TXyindR+lBr22aJIdMQzCFHPHR6cR4js838mRDCSz5hOKWZvZwsXSSiXDmjRj4iJmgl+sR9O+1mkoVBSMadNug==}
+  '@types/node@24.13.6':
+    resolution: {integrity: sha512-SGrw/h3KPFshy3OE6ZL53LMBG5vGQQ8/gIpiqz/kRZhPJ7HgwCEs8LBuNtWLa8dvGZVpSF7+Bf+c11HUrCb/yg==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1147,8 +1147,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  dotenv@18.0.0:
-    resolution: {integrity: sha512-16YSUvsKtKbwrTbESvtTSZzzJUug6jdFdqiBFg9Q6Bk1JY9r0hAtrtTiWxdI9YrsgOTmkjZRdgU0n3LnwGpECw==}
+  dotenv@18.0.1:
+    resolution: {integrity: sha512-0eR4m4D/jH5eaI3evo2ZqqMii5mrTCR12v12VChdie6O1gPHs7XAjzTep0CWc1Bd+oNx3vVfbi734dK4zghigw==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -1715,8 +1715,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  typedoc-plugin-dt-links@2.0.72:
-    resolution: {integrity: sha512-ndcSnSAHh9kp4s2I8bQc+PVKKJ7vA+l/0U0hoNOWS+cPSwZ+YqHDeaETN+twHlamYfrm+/3MlmBQ5dc0gCt6Yg==}
+  typedoc-plugin-dt-links@2.0.73:
+    resolution: {integrity: sha512-GS9JSuFX+lDndTdODUlOFj1VULzsp4XZhVghZh6WBaIMglhxHdDEwFHiqvCyUl+sdaTRYSlh9DjAPaE+nDMePQ==}
     peerDependencies:
       typedoc: 0.28.x
 
@@ -2353,7 +2353,7 @@ snapshots:
 
   '@types/etag@1.8.4':
     dependencies:
-      '@types/node': 24.13.5
+      '@types/node': 24.13.6
 
   '@types/hast@3.0.5':
     dependencies:
@@ -2361,7 +2361,7 @@ snapshots:
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
-  '@types/node@24.13.5':
+  '@types/node@24.13.6':
     dependencies:
       undici-types: 7.18.2
 
@@ -2385,7 +2385,7 @@ snapshots:
       obug: 2.2.1
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 5.0.1(@types/node@24.13.5)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1))
+      vitest: 5.0.1(@types/node@24.13.6)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1))
 
   '@vitest/istanbul-lib-coverage@1.0.1': {}
 
@@ -2393,14 +2393,14 @@ snapshots:
     dependencies:
       '@vitest/istanbul-lib-coverage': 1.0.1
 
-  '@vitest/mocker@5.0.1(vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1))':
+  '@vitest/mocker@5.0.1(vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.1
       estree-walker: 3.0.3
       magic-string: 1.4.1
     optionalDependencies:
-      vite: 8.3.0(@types/node@24.13.5)(yaml@2.9.1)
+      vite: 8.3.0(@types/node@24.13.6)(yaml@2.9.1)
 
   '@vitest/spy@5.0.1': {}
 
@@ -2559,7 +2559,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  dotenv@18.0.0: {}
+  dotenv@18.0.1: {}
 
   dts-resolver@3.0.0: {}
 
@@ -2907,23 +2907,17 @@ snapshots:
 
   safe-buffer@5.2.1: {}
 
-  secretspec-darwin-arm64@0.20.0:
-    optional: true
+  secretspec-darwin-arm64@0.20.0: {}
 
-  secretspec-linux-arm64-gnu@0.20.0:
-    optional: true
+  secretspec-linux-arm64-gnu@0.20.0: {}
 
-  secretspec-linux-arm64-musl@0.20.0:
-    optional: true
+  secretspec-linux-arm64-musl@0.20.0: {}
 
-  secretspec-linux-x64-gnu@0.20.0:
-    optional: true
+  secretspec-linux-x64-gnu@0.20.0: {}
 
-  secretspec-linux-x64-musl@0.20.0:
-    optional: true
+  secretspec-linux-x64-musl@0.20.0: {}
 
-  secretspec-win32-x64-msvc@0.20.0:
-    optional: true
+  secretspec-win32-x64-msvc@0.20.0: {}
 
   secretspec@0.20.0:
     optionalDependencies:
@@ -3030,7 +3024,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  typedoc-plugin-dt-links@2.0.72(typedoc@0.28.20(typescript@6.0.3)):
+  typedoc-plugin-dt-links@2.0.73(typedoc@0.28.20(typescript@6.0.3)):
     dependencies:
       typedoc: 0.28.20(typescript@6.0.3)
 
@@ -3066,7 +3060,7 @@ snapshots:
 
   verkit@0.4.0: {}
 
-  vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1):
+  vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -3074,14 +3068,14 @@ snapshots:
       rolldown: 1.2.9
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 24.13.5
+      '@types/node': 24.13.6
       fsevents: 2.3.3
       yaml: 2.9.1
 
-  vitest@5.0.1(@types/node@24.13.5)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1)):
+  vitest@5.0.1(@types/node@24.13.6)(@vitest/coverage-v8@5.0.1)(vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.1(vite@8.3.0(@types/node@24.13.5)(yaml@2.9.1))
+      '@vitest/mocker': 5.0.1(vite@8.3.0(@types/node@24.13.6)(yaml@2.9.1))
       chai: 6.2.2
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -3092,10 +3086,10 @@ snapshots:
       tinybench: 6.1.4
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
-      vite: 8.3.0(@types/node@24.13.5)(yaml@2.9.1)
+      vite: 8.3.0(@types/node@24.13.6)(yaml@2.9.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 24.13.5
+      '@types/node': 24.13.6
       '@vitest/coverage-v8': 5.0.1(vitest@5.0.1)
     transitivePeerDependencies:
       - msw
