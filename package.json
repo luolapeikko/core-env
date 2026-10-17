@@ -8,7 +8,7 @@
   "devDependencies": {
     "@avanio/expire-cache": "^0.7.0",
     "@avanio/logger-like": "^0.2.13",
-    "@azure/identity": "^4.13.3",
+    "@azure/identity": "^4.14.0",
     "@azure/keyvault-secrets": "^4.11.2",
     "@biomejs/biome": "^2.5.15",
     "@luolapeikko/core-ts-error": "^0.0.8",
@@ -19,7 +19,7 @@
     "@standard-schema/spec": "^1.1.0",
     "@types/etag": "^1.8.4",
     "@types/node": "^24.19.2",
-    "@vitest/coverage-v8": "^5.0.3",
+    "@vitest/coverage-v8": "^5.0.4",
     "c8": "^12.0.0",
     "dotenv": "^18.0.7",
     "etag": "^1.8.1",
@@ -31,8 +31,8 @@
     "typedoc-plugin-mdn-links": "^5.1.1",
     "typescript": "^6.0.3",
     "vite": "^8.3.4",
-    "vitest": "^5.0.3",
-    "zod": "^4.6.6"
+    "vitest": "^5.0.4",
+    "zod": "^4.6.7"
   },
   "scripts": {
     "build": "pnpm -r run build",
