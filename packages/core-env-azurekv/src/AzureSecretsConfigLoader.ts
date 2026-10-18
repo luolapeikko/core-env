@@ -82,7 +82,7 @@ export class AzureSecretsConfigLoader<EnvMap extends Record<string, unknown>> ex
 		return Result.asyncTupleFlow(this.getOptions(), ({cacheLogger, expireMs}) => {
 			// setup expire cache options
 			if (cacheLogger) {
-				this.valuePromises.logger.setLogger(cacheLogger);
+				this.valuePromises.logger.logger = cacheLogger;
 			}
 			if (expireMs !== undefined) {
 				this.valuePromises.setExpireMs(expireMs);

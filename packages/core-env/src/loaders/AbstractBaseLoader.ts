@@ -41,9 +41,9 @@ export abstract class AbstractBaseLoader<Props extends IAbstractBaseLoaderProps,
 	protected options: Loadable<Partial<Props>>;
 	protected overrideKeys: Partial<OverrideMap>;
 
-	public constructor(props: Loadable<Partial<Props>> = {}, overrideKeys: Partial<OverrideMap> = {}) {
+	public constructor(props?: Loadable<Partial<Props>>, overrideKeys: Partial<OverrideMap> = {}) {
 		super();
-		this.options = props;
+		this.options = props ?? {} as Loadable<Partial<Props>>;
 		this.overrideKeys = overrideKeys;
 	}
 
@@ -79,7 +79,7 @@ export abstract class AbstractBaseLoader<Props extends IAbstractBaseLoaderProps,
 		return Result.asyncTupleFlow(this.getOptions(), (options) => {
 			this.options = Object.assign({}, options, {
 				[key]: value,
-			});
+			}) as unknown as Loadable<Partial<Props>>;
 			return Ok();
 		});
 	}
