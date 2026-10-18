@@ -43,7 +43,7 @@ export abstract class AbstractBaseLoader<Props extends IAbstractBaseLoaderProps,
 
 	public constructor(props?: Loadable<Partial<Props>>, overrideKeys: Partial<OverrideMap> = {}) {
 		super();
-		this.options = props ?? {} as Loadable<Partial<Props>>;
+		this.options = props ?? ({} as Loadable<Partial<Props>>);
 		this.overrideKeys = overrideKeys;
 	}
 

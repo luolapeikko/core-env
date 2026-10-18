@@ -57,7 +57,7 @@ export abstract class AbstractMapLoader<
 	#isInitialized = false;
 
 	public constructor(props?: Loadable<Partial<Props>>, overrideKeys: Partial<OverrideMap> = {}, logMap?: LogMap) {
-		super(props ?? {} as Loadable<Partial<Props>>, overrideKeys);
+		super(props ?? ({} as Loadable<Partial<Props>>), overrideKeys);
 		this.logger = new MapLogger(undefined, Object.assign({}, this.defaultLogMap(), logMap ?? {}));
 	}
 

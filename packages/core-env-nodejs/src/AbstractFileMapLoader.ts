@@ -68,7 +68,7 @@ export abstract class AbstractFileMapLoader<
 	#timeout: ReturnType<typeof setTimeout> | undefined;
 
 	public constructor(props?: Loadable<Partial<Options>>, overrideKeys: Partial<OverrideMap> = {}, logMap?: LogMap) {
-		super(props ?? {} as Loadable<Partial<Options>>, overrideKeys, logMap);
+		super(props ?? ({} as Loadable<Partial<Options>>), overrideKeys, logMap);
 	}
 
 	/**

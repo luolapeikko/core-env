@@ -121,7 +121,7 @@ describe('config variable', () => {
 	Object.entries(tests).forEach(([driverName, serializer]) => {
 		describe(`TachyonConfigLoader with ${driverName}`, () => {
 			beforeAll(() => {
-				configMemoryDriver = new MemoryStorageDriver({name:'MemoryStorageDriver'}, serializer as IPersistSerializer<TachyonConfigStoreType, unknown>, null);
+				configMemoryDriver = new MemoryStorageDriver({name: 'MemoryStorageDriver'}, serializer as IPersistSerializer<TachyonConfigStoreType, unknown>, null);
 				loader = new TachyonConfigLoader(configMemoryDriver, {logger: testLogger}, undefined, 'unit-test');
 				testEnv = new EnvKit<EnvMap>(
 					{
